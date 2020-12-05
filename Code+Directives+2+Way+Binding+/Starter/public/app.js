@@ -3,7 +3,8 @@ var myApp = angular.module('myApp', []);
 myApp.controller('mainController', [
   '$scope',
   '$filter',
-  function ($scope, $filter) {
+  '$http',
+  function ($scope, $filter, $http) {
     $scope.handle = '';
     $scope.lowercaseHandle = function () {
       return $filter('lowercase')($scope.handle);
@@ -11,11 +12,14 @@ myApp.controller('mainController', [
 
     $scope.characters = 5;
 
-    $scope.rules = [
-      { rulename: 'Must be 5 characters' },
-      { rulename: 'Must not be used elsewhere' },
-      { rulename: 'Must be cool' }
-    ];
+    $http
+      .get('/api')
+      .then(res => {
+        $scope.rules = res.data;
+      })
+      .catch((err, status) => {
+        console.error(status, err.message);
+      });
 
     $scope.$watch('handle', function (newValue, oldValue) {
       console.log('Changed!');
