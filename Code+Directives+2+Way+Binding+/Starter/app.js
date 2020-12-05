@@ -9,6 +9,14 @@ myApp.controller('mainController', [
       return $filter('lowercase')($scope.handle);
     };
 
+    $scope.characters = 5;
+
+    $scope.rules = [
+      { rulename: 'Must be 5 characters' },
+      { rulename: 'Must not be used elsewhere' },
+      { rulename: 'Must be cool' }
+    ];
+
     $scope.$watch('handle', function (newValue, oldValue) {
       console.log('Changed!');
       console.log(`Old value: ${oldValue}`);
@@ -18,7 +26,7 @@ myApp.controller('mainController', [
     // also could use $timeout to save us from having to use $scope.$apply
     setTimeout(function () {
       $scope.$apply(function () {
-        $scope.handle = 'newtwitterhandle';
+        // $scope.handle = 'newtwitterhandle';
         console.log('Scope changed!');
       });
     }, 3000);

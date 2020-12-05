@@ -48,9 +48,34 @@
           <input type="text" name="handle" id="handle" ng-model="handle" />
         </div>
 
+        <div
+          class="alert"
+          ng-class="{ 'alert-warning': handle.length < characters, 'alert-danger': handle.length > characters }"
+          ng-if="handle.length !== characters"
+        >
+          You have <span ng-show="handle.length < characters">fewer</span
+          ><span ng-show="handle.length > characters">more</span> than {{
+          characters }} characters!
+        </div>
+
+        <!-- Roughly equivalent to -->
+
+        <!-- <div class="alert" ng-show="handle.length !== characters">
+          Must be 5 characters!
+        </div>
+
+        <div class="alert" ng-hide="handle.length === characters">
+          Must be 5 characters!
+        </div> -->
+
         <hr />
 
         <h1>twitter.com/{{ lowercaseHandle() }}</h1>
+
+        <h3>Rules</h3>
+        <ul>
+          <li ng-repeat="rule in rules">{{ rule.rulename }}</li>
+        </ul>
       </div>
     </div>
   </body>
