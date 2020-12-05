@@ -30,5 +30,8 @@ myApp.controller('mainController', [
         console.log('Scope changed!');
       });
     }, 3000);
+
+    $scope.alertClick = () => alert('You clicked me');
+    $scope.name = 'John Doe';
   }
 ]);

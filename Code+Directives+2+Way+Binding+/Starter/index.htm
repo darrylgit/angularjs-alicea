@@ -76,6 +76,12 @@
         <ul>
           <li ng-repeat="rule in rules">{{ rule.rulename }}</li>
         </ul>
+
+        <hr />
+
+        <button ng-click="alertClick()">Click me</button>
+
+        <div ng-cloak>{{ name }}</div>
       </div>
     </div>
   </body>
