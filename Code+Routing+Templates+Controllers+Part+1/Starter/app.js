@@ -60,3 +60,10 @@ myApp.controller('secondController', [
     $scope.num = $routeParams.num || 1;
   }
 ]);
+
+myApp.directive('searchResult', function () {
+  return {
+    template:
+      '<a href="#" class="list-group-item"><h4 class="list-group-item-heading">Doe, John</h4><p class="list-group-item-text">555 Main St., New York, NY 11111</p></a>'
+  };
+});
