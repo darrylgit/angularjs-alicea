@@ -97,6 +97,22 @@ myApp.directive('searchResult', function () {
     scope: {
       personObject: '=',
       formattedAddressFunction: '&'
+    },
+    compile: function (el, attrs) {
+      console.log('Compiling...');
+      console.log(el);
+
+      return {
+        pre: function (scope, el, attrs) {
+          console.log('Pre-linking...');
+          console.log(el);
+        },
+
+        post: function (scope, el, attrs) {
+          console.log('Post-linking...');
+          console.log(el);
+        }
+      };
     }
   };
 });

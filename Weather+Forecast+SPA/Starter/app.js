@@ -12,6 +12,6 @@ weatherApp.config(function ($routeProvider) {
     });
 });
 
-weatherApp.controller('mainController', [], function () {});
+weatherApp.controller('mainController', ['$scope'], function ($scope) {});
 
-weatherApp.controller('forecastController', [], function () {});
+weatherApp.controller('forecastController', ['$scope'], function ($scope) {});
