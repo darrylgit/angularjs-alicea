@@ -6,12 +6,33 @@ weatherApp.config(function ($routeProvider) {
       templateUrl: 'pages/main.htm',
       controller: 'mainController'
     })
-    .when('/forecast/:city', {
+    .when('/forecast/', {
       templateUrl: 'pages/forecast.htm',
       controller: 'forecastController'
     });
 });
 
-weatherApp.controller('mainController', ['$scope'], function ($scope) {});
+weatherApp.service('forecastByCity', function () {
+  this.city = '';
+});
 
-weatherApp.controller('forecastController', ['$scope'], function ($scope) {});
+weatherApp.controller('mainController', [
+  '$scope',
+  'forecastByCity',
+  function ($scope, forecastByCity) {
+    console.log('hello');
+    $scope.city = forecastByCity.city;
+
+    $scope.$watch('city', function () {
+      forecastByCity.city = $scope.city;
+    });
+  }
+]);
+
+weatherApp.controller('forecastController', [
+  '$scope',
+  'forecastByCity',
+  function ($scope, forecastByCity) {
+    $scope.city = forecastByCity.city;
+  }
+]);
