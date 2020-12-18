@@ -12,27 +12,43 @@ weatherApp.config(function ($routeProvider) {
     });
 });
 
-weatherApp.service('forecastByCity', function () {
-  this.city = '';
+weatherApp.service('cityService', function () {
+  this.city = 'London';
 });
 
 weatherApp.controller('mainController', [
   '$scope',
-  'forecastByCity',
-  function ($scope, forecastByCity) {
+  'cityService',
+  function ($scope, cityService) {
     console.log('hello');
-    $scope.city = forecastByCity.city;
+    $scope.city = cityService.city;
 
     $scope.$watch('city', function () {
-      forecastByCity.city = $scope.city;
+      cityService.city = $scope.city;
     });
   }
 ]);
 
 weatherApp.controller('forecastController', [
   '$scope',
-  'forecastByCity',
-  function ($scope, forecastByCity) {
-    $scope.city = forecastByCity.city;
+  '$resource',
+  'cityService',
+  function ($scope, $resource, cityService) {
+    $scope.city = cityService.city;
+
+    var APPID = '5a064f39448c6bddecac93165ac4fcb1';
+    $scope.weatherAPI = $resource(
+      `http://api.openweathermap.org/data/2.5/forecast/daily`,
+      { callback: 'JSON_CALLBACK' },
+      { get: { method: 'JSONP' } }
+    );
+
+    $scope.weatherResult = $scope.weatherAPI.get({
+      APPID,
+      q: $scope.city,
+      cnt: 2
+    });
+
+    console.log($scope.weatherResult);
   }
 ]);
