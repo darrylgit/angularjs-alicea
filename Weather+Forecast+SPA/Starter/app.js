@@ -41,7 +41,7 @@ weatherApp.controller('forecastController', [
   function ($scope, $resource, $routeParams, cityService) {
     $scope.city = cityService.city;
 
-    $scope.days = $routeParams.days || 2;
+    $scope.days = $routeParams.days || '2';
 
     var APPID = '5a064f39448c6bddecac93165ac4fcb1';
     $scope.weatherAPI = $resource(
