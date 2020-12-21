@@ -61,7 +61,21 @@ weatherApp.controller('forecastController', [
     };
 
     $scope.convertToDate = function (date) {
-      return new Date(date);
+      return new Date(date * 1000);
     };
   }
 ]);
+
+weatherApp.directive('weatherReport', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'directives/weatherReport.html',
+    replace: true,
+    scope: {
+      weatherDay: '=',
+      convertToStandard: '&',
+      convertToDate: '&',
+      dateFormat: '@'
+    }
+  };
+});
