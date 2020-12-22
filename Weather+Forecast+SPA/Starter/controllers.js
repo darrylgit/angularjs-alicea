@@ -1,13 +1,18 @@
 weatherApp.controller('mainController', [
   '$scope',
+  '$location',
   'cityService',
-  function ($scope, cityService) {
+  function ($scope, $location, cityService) {
     console.log('hello');
     $scope.city = cityService.city;
 
     $scope.$watch('city', function () {
       cityService.city = $scope.city;
     });
+
+    $scope.submit = function () {
+      $location.path('/forecast');
+    };
   }
 ]);
 
